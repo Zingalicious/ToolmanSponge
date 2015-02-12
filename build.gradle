@@ -1,0 +1,60 @@
+// Apply plugin
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+
+// Default tasks
+defaultTasks 'check', 'build'
+
+// Basic project information
+group = 'us.zingalicio'
+archivesBaseName = 'toolman'
+version = '0.0.1-SNAPSHOT'
+
+ext.projectName = 'Toolman'
+ext.inceptionYear = '2015'
+ext.packaging = 'jar'
+ext.url = 'http://zingalicio.us'
+ext.description = 'Toolman for Sponge'
+ext.organization = 'Zingalicious'
+
+// Minimum version of Java required
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+// Project repositories
+repositories {
+    mavenCentral()
+    maven { 
+    	name = "SpongeRepo"
+    	url = "http://repo.spongepowered.org/maven/"
+    }
+    maven { 
+    	name = "ZingRepo"
+    	url = "http://zingalicio.us/repo/"
+    }
+}
+
+configurations {
+    deployerJars // maven stuff
+}
+
+// Project dependencies
+dependencies {
+    compile 'org.spongepowered:spongeapi:1.1-SNAPSHOT'
+    compile 'us.zingalicio:cordstone:0.1.1-SNAPSHOT'
+    
+    // maven
+    deployerJars 'org.apache.maven.wagon:wagon-ftp:2.7'
+}
+
+// Source compiler configuration
+configure([compileJava, compileTestJava]) {
+    options.compilerArgs += ['-Xlint:all', '-Xlint:-path']
+    options.deprecation = true
+    options.encoding = 'utf8'
+}
+
+artifacts {
+    archives jar
+}
