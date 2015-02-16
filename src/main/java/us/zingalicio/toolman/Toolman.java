@@ -7,5 +7,6 @@ import us.zingalicio.cordstone.ZingPlugin;
 @Plugin(id = "toolman", name = "Toolman")
 public class Toolman extends ZingPlugin
 {
+	private ToolManager toolManager;
 	
 }
